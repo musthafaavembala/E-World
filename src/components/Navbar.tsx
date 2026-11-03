@@ -1,6 +1,6 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { Logo } from './Logo';
-import { Phone, MessageCircle, Menu, X, Calendar } from 'lucide-react';
+import { MessageCircle, Menu, X, Calendar, Home, Wind, BadgeCheck, MapPin } from 'lucide-react';
 
 interface NavbarProps {
   onOpenBooking: () => void;
@@ -9,6 +9,12 @@ interface NavbarProps {
 export const Navbar: React.FC<NavbarProps> = ({ onOpenBooking }) => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [mobileMenuMounted, setMobileMenuMounted] = useState(false);
+  const [activeSection, setActiveSection] = useState('home');
+  const mobileMenuToggleRef = useRef<HTMLButtonElement>(null);
+  const mobileNavigationRef = useRef<HTMLDivElement>(null);
+  const mobileMenuCloseRef = useRef<HTMLButtonElement>(null);
+  const restoreFocusAfterCloseRef = useRef(false);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -23,19 +29,77 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenBooking }) => {
   }, []);
 
   useEffect(() => {
+    const sectionIds = ['home', 'services', 'why-us', 'book', 'contact'];
+    const updateActiveSection = () => {
+      const currentSection = sectionIds.reduce((active, id) => {
+        const section = document.getElementById(id);
+        return section && section.getBoundingClientRect().top <= 120 ? id : active;
+      }, 'home');
+      setActiveSection(currentSection);
+    };
+
+    updateActiveSection();
+    window.addEventListener('scroll', updateActiveSection, { passive: true });
+    window.addEventListener('hashchange', updateActiveSection);
+    return () => {
+      window.removeEventListener('scroll', updateActiveSection);
+      window.removeEventListener('hashchange', updateActiveSection);
+    };
+  }, []);
+
+  useEffect(() => {
     if (!mobileMenuOpen) return;
+    mobileMenuCloseRef.current?.focus();
     const handleKeyDown = (event: KeyboardEvent) => {
-      if (event.key === 'Escape') setMobileMenuOpen(false);
+      if (event.key === 'Escape') {
+        closeMobileMenu(true);
+        return;
+      }
+
+      if (event.key !== 'Tab') return;
+      const focusableElements = mobileNavigationRef.current?.querySelectorAll<HTMLElement>(
+        'a[href], button:not([disabled])',
+      );
+      if (!focusableElements?.length) return;
+
+      const firstElement = focusableElements[0];
+      const lastElement = focusableElements[focusableElements.length - 1];
+      const focusIsOutsideMenu = !mobileNavigationRef.current?.contains(document.activeElement);
+
+      if (event.shiftKey && (document.activeElement === firstElement || focusIsOutsideMenu)) {
+        event.preventDefault();
+        lastElement.focus();
+      } else if (!event.shiftKey && (document.activeElement === lastElement || focusIsOutsideMenu)) {
+        event.preventDefault();
+        firstElement.focus();
+      }
     };
     window.addEventListener('keydown', handleKeyDown);
     return () => window.removeEventListener('keydown', handleKeyDown);
   }, [mobileMenuOpen]);
 
+  const openMobileMenu = () => {
+    setMobileMenuMounted(true);
+    setMobileMenuOpen(true);
+  };
+
+  const closeMobileMenu = (restoreFocus = false) => {
+    setMobileMenuOpen(false);
+    if (restoreFocus) mobileMenuToggleRef.current?.focus();
+  };
+
   const navLinks = [
     { name: 'Home', href: '#home' },
     { name: 'Services', href: '#services' },
-    { name: 'Booking', href: '#book' },
     { name: 'Contact', href: '#contact' },
+  ];
+
+  const mobileNavLinks = [
+    { name: 'Home', href: '#home', section: 'home', Icon: Home },
+    { name: 'Services', href: '#services', section: 'services', Icon: Wind },
+    { name: 'Why Us', href: '#why-us', section: 'why-us', Icon: BadgeCheck },
+    { name: 'Booking', href: '#book', section: 'book', Icon: Calendar },
+    { name: 'Contact', href: '#contact', section: 'contact', Icon: MapPin },
   ];
 
   return (
@@ -104,9 +168,10 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenBooking }) => {
               Booking
             </button>
             <button
-              onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+              ref={mobileMenuToggleRef}
+              onClick={() => mobileMenuOpen ? closeMobileMenu() : openMobileMenu()}
               className="p-1.5 sm:p-2 rounded-xl bg-white/5 border border-brand-border text-brand-muted hover:text-white transition"
-              aria-label={mobileMenuOpen ? 'Close menu' : 'Open menu'}
+              aria-label={mobileMenuOpen ? 'Close navigation menu' : 'Open menu'}
               aria-expanded={mobileMenuOpen}
               aria-controls="mobile-navigation"
             >
@@ -117,38 +182,78 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenBooking }) => {
       </div>
 
       {/* Mobile Drawer */}
-      <div id="mobile-navigation" hidden={!mobileMenuOpen} className="lg:hidden absolute inset-x-0 top-full bg-sky-200/98 backdrop-blur-xl border-b border-sky-300 shadow-2xl px-5 sm:px-6 py-4 transition-all animate-in slide-in-from-top-4 max-h-[calc(100vh-4.5rem)] overflow-y-auto">
-          <nav className="flex flex-col gap-2">
-            {navLinks.filter((link) => link.name !== 'Booking').map((link) => (
-              <a
-                key={link.name}
-                href={link.href}
-                onClick={() => setMobileMenuOpen(false)}
-                className="text-sm font-medium text-slate-900 hover:text-blue-700 transition py-2"
-              >
-                {link.name}
-              </a>
-            ))}
-          </nav>
-          <div className="mt-3 grid grid-cols-2 gap-2 border-t border-sky-300 pt-3">
-            <a
-              href="tel:+918157001618"
-              className="flex items-center justify-center gap-2 rounded-lg border border-sky-300 bg-white/70 py-2.5 text-xs font-semibold text-slate-900"
+      {mobileMenuMounted && (
+        <button
+          type="button"
+          aria-label="Close mobile navigation"
+          tabIndex={-1}
+          aria-hidden="true"
+          onClick={() => closeMobileMenu(true)}
+          className={`fixed inset-x-0 top-16 bottom-0 z-0 bg-black/40 transition-opacity duration-200 lg:hidden ${
+            mobileMenuOpen ? 'opacity-100' : 'pointer-events-none opacity-0'
+          }`}
+        />
+      )}
+      {mobileMenuMounted && (
+        <div
+          id="mobile-navigation"
+          ref={mobileNavigationRef}
+          aria-label="Mobile navigation"
+          aria-hidden={!mobileMenuOpen}
+          onAnimationEnd={(event) => {
+            if (!mobileMenuOpen && event.animationName === 'mobile-menu-out') {
+              setMobileMenuMounted(false);
+              if (restoreFocusAfterCloseRef.current) {
+                restoreFocusAfterCloseRef.current = false;
+                mobileMenuToggleRef.current?.focus({ preventScroll: true });
+              }
+            }
+          }}
+          className={`lg:hidden absolute inset-x-0 top-full z-10 max-h-[calc(100vh-4.5rem)] overflow-y-auto rounded-b-2xl border-b border-sky-300 bg-gradient-to-br from-sky-100 via-sky-200 to-blue-200 px-5 py-4 shadow-2xl sm:px-6 ${
+            mobileMenuOpen ? 'mobile-menu-enter' : 'mobile-menu-exit'
+          }`}
+        >
+          <div className="mb-3 flex items-center justify-between border-b border-blue-300/70 pb-3">
+            <span className="text-sm font-bold text-slate-900">Menu</span>
+            <button
+              ref={mobileMenuCloseRef}
+              type="button"
+              onClick={() => closeMobileMenu(true)}
+              tabIndex={mobileMenuOpen ? 0 : -1}
+              aria-label="Close menu"
+              className="rounded-lg border border-blue-300 bg-white/70 p-2 text-slate-900 transition hover:bg-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-600"
             >
-              <Phone className="h-4 w-4 text-blue-700" />
-              Call
-            </a>
-            <a
-              href="https://wa.me/918157001618?text=Hello%20E%20WORLD%2C%20I%20would%20like%20to%20enquire%20about%20your%20services."
-              target="_blank"
-              rel="noopener noreferrer"
-              className="flex items-center justify-center gap-2 rounded-lg border border-emerald-700/20 bg-white/70 py-2.5 text-xs font-semibold text-emerald-800"
-            >
-              <MessageCircle className="h-4 w-4" />
-              WhatsApp
-            </a>
+              <X className="h-4 w-4" aria-hidden="true" />
+            </button>
           </div>
-      </div>
+          <nav className="flex flex-col gap-1">
+            {mobileNavLinks.map(({ name, href, section, Icon }) => {
+              const isActive = activeSection === section;
+              return (
+              <a
+                key={name}
+                href={href}
+                tabIndex={mobileMenuOpen ? 0 : -1}
+                aria-current={isActive ? 'location' : undefined}
+                onClick={() => {
+                  setActiveSection(section);
+                  restoreFocusAfterCloseRef.current = true;
+                  closeMobileMenu();
+                }}
+                className={`flex min-h-11 items-center gap-3 rounded-xl border-l-4 px-3 py-2.5 text-sm font-semibold transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-700 ${
+                  isActive
+                    ? 'border-cyan-500 bg-white/80 text-blue-950 shadow-sm'
+                    : 'border-transparent text-slate-900 hover:border-blue-400 hover:bg-white/50 hover:text-blue-900'
+                }`}
+              >
+                <Icon className={`h-4 w-4 shrink-0 ${isActive ? 'text-blue-700' : 'text-slate-700'}`} aria-hidden="true" />
+                {name}
+              </a>
+              );
+            })}
+          </nav>
+        </div>
+      )}
     </header>
   );
 };

@@ -39,15 +39,9 @@ export const WhyChooseSection: React.FC = () => {
     <section id="why-us" className="py-14 sm:py-20 lg:py-28 bg-brand-deep/50 relative border-y border-brand-border">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center max-w-3xl mx-auto">
-          <span className="text-xs font-bold uppercase tracking-widest text-brand-cyan">
-            Trust &amp; Reliability
-          </span>
-          <h2 className="mt-3 text-2xl sm:text-4xl lg:text-5xl font-extrabold text-white tracking-tight">
-            Why Homeowners Choose <span className="gradient-text-cool">E WORLD</span>
+          <h2 className="text-2xl sm:text-4xl lg:text-5xl font-extrabold text-white tracking-tight">
+            Why Us
           </h2>
-          <p className="mt-3 sm:mt-4 text-sm sm:text-base lg:text-lg text-brand-muted">
-            Dependable appliance care built on skilled technicians, honest advice, and respectful home service.
-          </p>
         </div>
 
         <div className="mt-10 sm:mt-14 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 sm:gap-8">

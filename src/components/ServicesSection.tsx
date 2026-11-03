@@ -6,7 +6,7 @@ interface ServicesSectionProps {
 }
 
 export const ServicesSection: React.FC<ServicesSectionProps> = ({ onSelectService }) => (
-  <section id="services" className="scroll-mt-20 py-8 sm:py-10">
+  <section id="services" className="py-8 sm:py-10">
     <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
       <div className="mb-5 flex items-end justify-between gap-3">
         <div>

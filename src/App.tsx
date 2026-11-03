@@ -2,8 +2,8 @@ import React, { useState } from 'react';
 import { Navbar } from './components/Navbar';
 import { Hero } from './components/Hero';
 import { ServicesSection } from './components/ServicesSection';
+import { WhyChooseSection } from './components/WhyChooseSection';
 import { BookingSection } from './components/BookingSection';
-import { ContactSection } from './components/ContactSection';
 import { Footer } from './components/Footer';
 import { ServiceItem } from './data/servicesData';
 
@@ -29,8 +29,8 @@ export const App: React.FC = () => {
       <main className="flex-grow w-full overflow-x-hidden">
         <Hero />
         <ServicesSection onSelectService={handleSelectService} />
+        <WhyChooseSection />
         <BookingSection prefilledService={prefilledService} />
-        <ContactSection />
       </main>
 
       {/* Premium Footer */}

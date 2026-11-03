@@ -2,7 +2,7 @@ import React from 'react';
 import { Clock, MapPin, MessageCircle, Phone } from 'lucide-react';
 
 export const ContactSection: React.FC = () => (
-  <section id="contact" className="scroll-mt-20 border-t border-brand-border py-8 sm:py-10">
+  <section id="contact" className="border-t border-brand-border py-8 sm:py-10">
     <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
       <h2 className="text-xl font-bold tracking-tight text-white sm:text-2xl">Contact</h2>
       <div className="mt-4 flex flex-col gap-3 sm:flex-row">

@@ -1,9 +1,8 @@
 import React from 'react';
 
 const homeImage = new URL('../images-ewold/first image for e-world website.jpeg', import.meta.url).href;
-
 export const Hero: React.FC = () => (
-  <section id="home" className="relative overflow-hidden pt-24 pb-8 sm:pt-28 sm:pb-10">
+  <section id="home" className="relative overflow-hidden pt-20 pb-6 sm:pt-28 sm:pb-10">
     <div className="absolute -top-20 left-1/2 h-64 w-64 -translate-x-1/2 rounded-full bg-brand-blue/15 blur-[100px] pointer-events-none" />
     <div className="relative z-10 mx-auto grid max-w-7xl items-center gap-6 px-4 sm:px-6 lg:grid-cols-2 lg:gap-10 lg:px-8">
       <div>
