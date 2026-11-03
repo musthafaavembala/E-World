@@ -8,16 +8,16 @@ export const Footer: React.FC = () => {
   };
 
   return (
-    <footer className="bg-brand-midnight border-t border-brand-border/80 pt-16 pb-28 sm:pb-16 text-brand-muted text-xs">
+    <footer className="bg-brand-midnight border-t border-brand-border/80 pt-12 sm:pt-16 pb-28 sm:pb-16 text-brand-muted text-xs">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-10 pb-12 border-b border-brand-border/60">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-8 sm:gap-10 pb-10 sm:pb-12 border-b border-brand-border/60">
           {/* Column 1: Brand Info */}
           <div className="lg:col-span-4">
-            <Logo size="lg" />
-            <p className="mt-4 text-sm text-brand-muted leading-relaxed">
+            <Logo size="md" />
+            <p className="mt-4 text-xs sm:text-sm text-brand-muted leading-relaxed">
               Your Cooling Care Partner. Providing professional AC water service, deep foam cleaning, and washing machine repair with genuine parts and honest pricing in Kerala.
             </p>
-            <div className="mt-4 inline-block px-3 py-1 rounded-md bg-white/5 border border-white/10 text-brand-soft text-[11px] font-semibold">
+            <div className="mt-3.5 sm:mt-4 inline-block px-3 py-1 rounded-md bg-white/5 border border-white/10 text-brand-soft text-[10.5px] sm:text-[11px] font-semibold">
               Tagline: &ldquo;Comfort. Care. Confidence.&rdquo;
             </div>
           </div>
@@ -104,17 +104,17 @@ export const Footer: React.FC = () => {
         </div>
 
         {/* Bottom Bar */}
-        <div className="pt-8 flex flex-col sm:flex-row items-center justify-between gap-4">
+        <div className="pt-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-center sm:text-left">
           <p className="text-brand-muted">
             &copy; 2026 E WORLD. All rights reserved. Professional AC &amp; Washing Machine Service.
           </p>
 
           <div className="flex items-center gap-4">
             <span
-              onClick={() => window.open('https://devlophicin.vercel.app', '_blank', 'noopener,noreferrer')}
+              onClick={() => window.open('https://devlophic.vercel.app', '_blank', 'noopener,noreferrer')}
               onKeyDown={(e) => {
                 if (e.key === 'Enter' || e.key === ' ') {
-                  window.open('https://devlophicin.vercel.app', '_blank', 'noopener,noreferrer');
+                  window.open('https://devlophic.vercel.app', '_blank', 'noopener,noreferrer');
                 }
               }}
               tabIndex={0}

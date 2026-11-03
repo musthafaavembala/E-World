@@ -12,7 +12,7 @@ export const ServicesSection: React.FC<ServicesSectionProps> = ({ onSelectServic
   const filteredServices = servicesData.filter((s) => s.category === activeTab);
 
   return (
-    <section id="services" className="py-20 lg:py-28 relative">
+    <section id="services" className="py-14 sm:py-20 lg:py-28 relative">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
         <div className="text-center max-w-3xl mx-auto">
@@ -20,45 +20,45 @@ export const ServicesSection: React.FC<ServicesSectionProps> = ({ onSelectServic
             <Sparkles className="w-3.5 h-3.5" />
             <span>Dedicated Appliance Expertise</span>
           </div>
-          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-white tracking-tight">
+          <h2 className="text-2xl sm:text-4xl lg:text-5xl font-extrabold text-white tracking-tight">
             Our Expert Services
           </h2>
-          <p className="mt-4 text-base sm:text-lg text-brand-muted">
+          <p className="mt-3 sm:mt-4 text-sm sm:text-base lg:text-lg text-brand-muted">
             Professional care for the appliances that keep your home comfortable.
           </p>
         </div>
 
         {/* Category Tabs */}
-        <div className="mt-10 flex justify-center">
-          <div className="inline-flex p-1.5 rounded-2xl bg-brand-card/90 border border-brand-border backdrop-blur-md">
+        <div className="mt-8 sm:mt-10 flex justify-center">
+          <div className="inline-flex p-1 sm:p-1.5 rounded-2xl bg-brand-card/90 border border-brand-border backdrop-blur-md max-w-full w-full sm:w-auto">
             <button
               onClick={() => setActiveTab('ac')}
-              className={`flex items-center gap-2 px-6 py-3 rounded-xl text-sm font-bold transition-all duration-200 ${
+              className={`flex-1 sm:flex-initial flex items-center justify-center gap-1.5 sm:gap-2 px-3 sm:px-6 py-2.5 sm:py-3 rounded-xl text-xs sm:text-sm font-bold transition-all duration-200 ${
                 activeTab === 'ac'
                   ? 'bg-gradient-to-r from-brand-blue to-brand-cyan text-white shadow-glow-blue'
                   : 'text-brand-muted hover:text-white'
               }`}
             >
-              <Wind className="w-4 h-4" />
+              <Wind className="w-3.5 h-3.5 sm:w-4 sm:h-4 shrink-0" />
               <span>Air Conditioning ({servicesData.filter((s) => s.category === 'ac').length})</span>
             </button>
 
             <button
               onClick={() => setActiveTab('washing-machine')}
-              className={`flex items-center gap-2 px-6 py-3 rounded-xl text-sm font-bold transition-all duration-200 ${
+              className={`flex-1 sm:flex-initial flex items-center justify-center gap-1.5 sm:gap-2 px-3 sm:px-6 py-2.5 sm:py-3 rounded-xl text-xs sm:text-sm font-bold transition-all duration-200 ${
                 activeTab === 'washing-machine'
                   ? 'bg-gradient-to-r from-brand-blue to-brand-cyan text-white shadow-glow-blue'
                   : 'text-brand-muted hover:text-white'
               }`}
             >
-              <Disc className="w-4 h-4" />
+              <Disc className="w-3.5 h-3.5 sm:w-4 sm:h-4 shrink-0" />
               <span>Washing Machine ({servicesData.filter((s) => s.category === 'washing-machine').length})</span>
             </button>
           </div>
         </div>
 
         {/* Category Description Banner */}
-        <div className="mt-8 text-center text-xs text-brand-muted max-w-xl mx-auto">
+        <div className="mt-6 sm:mt-8 text-center text-xs text-brand-muted max-w-xl mx-auto px-2">
           {activeTab === 'ac' ? (
             <p>
               Complete cooling maintenance and pressure cleaning tailored for coastal Kerala humidity and dust conditions.
@@ -71,7 +71,7 @@ export const ServicesSection: React.FC<ServicesSectionProps> = ({ onSelectServic
         </div>
 
         {/* Service Cards Grid */}
-        <div className="mt-12 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
+        <div className="mt-10 sm:mt-12 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
           {filteredServices.map((service) => (
             <div
               key={service.id}
@@ -95,9 +95,9 @@ export const ServicesSection: React.FC<ServicesSectionProps> = ({ onSelectServic
               </div>
 
               {/* Card Body */}
-              <div className="p-6 flex-1 flex flex-col justify-between">
+              <div className="p-5 sm:p-6 flex-1 flex flex-col justify-between">
                 <div>
-                  <h3 className="text-xl font-bold text-white group-hover:text-brand-cyan transition-colors">
+                  <h3 className="text-lg sm:text-xl font-bold text-white group-hover:text-brand-cyan transition-colors">
                     {service.title}
                   </h3>
                   <p className="mt-2 text-sm text-brand-muted leading-relaxed">

@@ -67,22 +67,22 @@ export const OurWorkGallery: React.FC = () => {
   };
 
   return (
-    <section id="our-work" className="py-20 lg:py-28 bg-brand-deep/30 relative border-t border-brand-border">
+    <section id="our-work" className="py-14 sm:py-20 lg:py-28 bg-brand-deep/30 relative border-t border-brand-border">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center max-w-3xl mx-auto">
           <span className="text-xs font-bold uppercase tracking-widest text-brand-cyan">
             Visual Proof of Care
           </span>
-          <h2 className="mt-3 text-3xl sm:text-4xl lg:text-5xl font-extrabold text-white tracking-tight">
+          <h2 className="mt-3 text-2xl sm:text-4xl lg:text-5xl font-extrabold text-white tracking-tight">
             Quality Work. <span className="gradient-text-cool">Professional Care.</span>
           </h2>
-          <p className="mt-4 text-base sm:text-lg text-brand-muted">
+          <p className="mt-3 sm:mt-4 text-sm sm:text-base lg:text-lg text-brand-muted">
             From high-pressure water jacket cleaning to delicate washing machine circuit repair, explore our standards of workmanship.
           </p>
         </div>
 
         {/* Gallery Grid */}
-        <div className="mt-14 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div className="mt-10 sm:mt-14 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 sm:gap-6">
           {galleryItems.map((item, index) => (
             <div
               key={item.id}
@@ -97,7 +97,7 @@ export const OurWorkGallery: React.FC = () => {
               />
               <div className="absolute inset-0 bg-gradient-to-t from-brand-midnight/90 via-brand-midnight/30 to-transparent opacity-80 group-hover:opacity-90 transition-opacity" />
 
-              <div className="absolute inset-0 p-5 flex flex-col justify-between">
+              <div className="absolute inset-0 p-4 sm:p-5 flex flex-col justify-between">
                 <div className="self-end">
                   <div className="p-2 rounded-full bg-brand-midnight/60 backdrop-blur-md text-white opacity-0 group-hover:opacity-100 transition-opacity">
                     <Maximize2 className="w-4 h-4 text-brand-cyan" />
@@ -108,7 +108,7 @@ export const OurWorkGallery: React.FC = () => {
                   <span className="text-[10px] font-bold uppercase tracking-wider text-brand-cyan">
                     {item.category}
                   </span>
-                  <h3 className="text-sm font-semibold text-white mt-1 leading-snug">
+                  <h3 className="text-xs sm:text-sm font-semibold text-white mt-1 leading-snug">
                     {item.title}
                   </h3>
                 </div>
@@ -126,46 +126,46 @@ export const OurWorkGallery: React.FC = () => {
       {selectedImageIndex !== null && (
         <div
           onClick={() => setSelectedImageIndex(null)}
-          className="fixed inset-0 z-50 bg-black/90 backdrop-blur-xl flex items-center justify-center p-4 sm:p-8 animate-in fade-in"
+          className="fixed inset-0 z-50 bg-black/90 backdrop-blur-xl flex items-center justify-center p-3 sm:p-8 animate-in fade-in"
         >
           <button
             onClick={() => setSelectedImageIndex(null)}
-            className="absolute top-6 right-6 p-3 rounded-full bg-white/10 hover:bg-white/20 text-white transition z-10"
+            className="absolute top-4 right-4 sm:top-6 sm:right-6 p-2 sm:p-3 rounded-full bg-white/10 hover:bg-white/20 text-white transition z-10"
             aria-label="Close lightbox"
           >
-            <X className="w-6 h-6" />
+            <X className="w-5 h-5 sm:w-6 sm:h-6" />
           </button>
 
           <button
             onClick={handlePrev}
-            className="absolute left-4 sm:left-8 p-3 rounded-full bg-white/10 hover:bg-white/20 text-white transition z-10"
+            className="absolute left-2 sm:left-8 p-2 sm:p-3 rounded-full bg-white/10 hover:bg-white/20 text-white transition z-10"
             aria-label="Previous photo"
           >
-            <ChevronLeft className="w-6 h-6" />
+            <ChevronLeft className="w-5 h-5 sm:w-6 sm:h-6" />
           </button>
 
           <button
             onClick={handleNext}
-            className="absolute right-4 sm:right-8 p-3 rounded-full bg-white/10 hover:bg-white/20 text-white transition z-10"
+            className="absolute right-2 sm:right-8 p-2 sm:p-3 rounded-full bg-white/10 hover:bg-white/20 text-white transition z-10"
             aria-label="Next photo"
           >
-            <ChevronRight className="w-6 h-6" />
+            <ChevronRight className="w-5 h-5 sm:w-6 sm:h-6" />
           </button>
 
           <div
             onClick={(e) => e.stopPropagation()}
-            className="relative max-w-4xl max-h-[85vh] flex flex-col items-center"
+            className="relative max-w-4xl max-h-[85vh] flex flex-col items-center px-2"
           >
             <img
               src={galleryItems[selectedImageIndex].image}
               alt={galleryItems[selectedImageIndex].title}
-              className="max-w-full max-h-[75vh] object-contain rounded-xl shadow-2xl border border-white/10"
+              className="max-w-full max-h-[65vh] sm:max-h-[75vh] object-contain rounded-xl shadow-2xl border border-white/10"
             />
-            <div className="mt-4 text-center">
-              <span className="text-xs font-bold text-brand-cyan uppercase tracking-wider">
+            <div className="mt-3 sm:mt-4 text-center px-4">
+              <span className="text-[11px] sm:text-xs font-bold text-brand-cyan uppercase tracking-wider">
                 {galleryItems[selectedImageIndex].category}
               </span>
-              <h4 className="text-base sm:text-lg font-bold text-white mt-1">
+              <h4 className="text-sm sm:text-lg font-bold text-white mt-1 leading-snug">
                 {galleryItems[selectedImageIndex].title}
               </h4>
             </div>

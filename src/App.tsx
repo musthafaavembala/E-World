@@ -40,12 +40,12 @@ export const App: React.FC = () => {
   };
 
   return (
-    <div className="min-h-screen bg-brand-midnight text-brand-soft flex flex-col">
+    <div className="min-h-screen bg-brand-midnight text-brand-soft flex flex-col w-full overflow-x-hidden">
       {/* Sticky Top Navigation */}
       <Navbar onOpenBooking={scrollToBooking} />
 
       {/* Main Content Sections */}
-      <main className="flex-grow">
+      <main className="flex-grow w-full overflow-x-hidden">
         <Hero onOpenBooking={scrollToBooking} />
         <ServicesSection onSelectService={handleSelectService} />
         <WhyChooseSection />

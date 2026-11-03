@@ -12,25 +12,25 @@ export const Logo: React.FC<LogoProps> = ({
   variant = 'dark',
 }) => {
   const iconSizes = {
-    sm: 'w-8 h-8 rounded-lg',
-    md: 'w-10 h-10 rounded-xl',
-    lg: 'w-12 h-12 rounded-2xl',
+    sm: 'w-7 h-7 sm:w-8 sm:h-8 rounded-lg',
+    md: 'w-9 h-9 sm:w-10 sm:h-10 rounded-xl',
+    lg: 'w-10 h-10 sm:w-12 sm:h-12 rounded-xl sm:rounded-2xl',
   };
 
   const textSizes = {
-    sm: 'text-base',
-    md: 'text-xl',
-    lg: 'text-2xl',
+    sm: 'text-sm sm:text-base',
+    md: 'text-lg sm:text-xl',
+    lg: 'text-xl sm:text-2xl',
   };
 
   const subTextSizes = {
-    sm: 'text-[9px] tracking-wider',
-    md: 'text-[10px] tracking-widest',
-    lg: 'text-[11px] tracking-widest',
+    sm: 'text-[8px] sm:text-[9px] tracking-wider',
+    md: 'text-[8.5px] sm:text-[10px] tracking-wider sm:tracking-widest',
+    lg: 'text-[9.5px] sm:text-[11px] tracking-wider sm:tracking-widest',
   };
 
   return (
-    <div className={`flex items-center gap-3 select-none ${className}`}>
+    <div className={`flex items-center gap-2.5 sm:gap-3 select-none min-w-0 ${className}`}>
       {/* Original Brand Badge with Cooling Gradient */}
       <div
         className={`${iconSizes[size]} gradient-cool flex items-center justify-center shrink-0 shadow-glow-blue border border-white/20`}

@@ -40,12 +40,12 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenBooking }) => {
           : 'bg-transparent py-5'
       }`}
     >
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex items-center justify-between">
+      <div className="max-w-7xl mx-auto px-3.5 sm:px-6 lg:px-8">
+        <div className="flex items-center justify-between gap-2">
           {/* Brand Logo */}
           <a
             href="#home"
-            className="focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-cyan rounded-lg transition"
+            className="focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-cyan rounded-lg transition shrink min-w-0"
             aria-label="E WORLD Home"
           >
             <Logo size="md" />
@@ -65,7 +65,7 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenBooking }) => {
           </nav>
 
           {/* Action CTAs */}
-          <div className="hidden sm:flex items-center gap-3">
+          <div className="hidden sm:flex items-center gap-3 shrink-0">
             <a
               href="https://wa.me/918157001618?text=Hello%20E%20WORLD%2C%20I%20would%20like%20to%20enquire%20about%20your%20services."
               target="_blank"
@@ -87,16 +87,16 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenBooking }) => {
           </div>
 
           {/* Mobile Menu Toggle Button */}
-          <div className="flex items-center gap-2 lg:hidden">
+          <div className="flex items-center gap-1.5 sm:gap-2 lg:hidden shrink-0">
             <button
               onClick={onOpenBooking}
-              className="sm:hidden px-3 py-1.5 rounded-full text-[11px] font-bold uppercase tracking-wider text-white gradient-cool shadow-glow-blue"
+              className="sm:hidden px-2.5 py-1.5 rounded-full text-[10.5px] font-bold uppercase tracking-wider text-white gradient-cool shadow-glow-blue whitespace-nowrap"
             >
               Book
             </button>
             <button
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-              className="p-2 rounded-xl bg-white/5 border border-brand-border text-brand-muted hover:text-white transition"
+              className="p-1.5 sm:p-2 rounded-xl bg-white/5 border border-brand-border text-brand-muted hover:text-white transition"
               aria-label={mobileMenuOpen ? 'Close menu' : 'Open menu'}
               aria-expanded={mobileMenuOpen}
             >
@@ -108,7 +108,7 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenBooking }) => {
 
       {/* Mobile Drawer */}
       {mobileMenuOpen && (
-        <div className="lg:hidden fixed inset-x-0 top-full bg-brand-midnight/98 backdrop-blur-xl border-b border-brand-border shadow-2xl px-6 py-6 transition-all animate-in slide-in-from-top-4">
+        <div className="lg:hidden fixed inset-x-0 top-full bg-brand-midnight/98 backdrop-blur-xl border-b border-brand-border shadow-2xl px-5 sm:px-6 py-6 transition-all animate-in slide-in-from-top-4 max-h-[calc(100vh-4.5rem)] overflow-y-auto">
           <nav className="flex flex-col gap-4">
             {navLinks.map((link) => (
               <a
