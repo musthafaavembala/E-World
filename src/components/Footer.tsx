@@ -4,7 +4,7 @@ import { Logo } from './Logo';
 import { servicesData } from '../data/servicesData';
 
 export const Footer: React.FC = () => (
-  <footer className="border-t border-brand-border bg-brand-midnight pb-24 pt-6 text-xs text-brand-muted sm:pb-4 sm:pt-8">
+  <footer className="border-t border-brand-border bg-brand-midnight py-6 text-xs text-brand-muted sm:py-8">
     <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
       <div className="grid gap-5 sm:grid-cols-2 sm:gap-6 lg:grid-cols-4">
         <div>

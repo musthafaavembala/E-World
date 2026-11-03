@@ -5,7 +5,6 @@ import { ServicesSection } from './components/ServicesSection';
 import { BookingSection } from './components/BookingSection';
 import { ContactSection } from './components/ContactSection';
 import { Footer } from './components/Footer';
-import { FloatingMobileBar } from './components/FloatingMobileBar';
 import { ServiceItem } from './data/servicesData';
 
 export const App: React.FC = () => {
@@ -36,9 +35,6 @@ export const App: React.FC = () => {
 
       {/* Premium Footer */}
       <Footer />
-
-      {/* Floating Bottom Action Bar for Mobile */}
-      <FloatingMobileBar onOpenBooking={scrollToBooking} />
     </div>
   );
 };
