@@ -5,23 +5,23 @@ export const CommitmentSection: React.FC = () => {
   const commitments = [
     {
       icon: ShieldCheck,
-      title: 'Honest Diagnoses',
-      description: 'We believe in fixing before replacing. If a simple filter wash or sensor adjustment solves the problem, we will never recommend costly unnecessary part swaps.',
+      title: 'Start with the Issue',
+      description: 'Share the symptoms and appliance details so the team can discuss possible checks and next steps.',
     },
     {
       icon: HeartHandshake,
-      title: 'Respect for Your Home',
-      description: 'Technicians take off footwear or use clean covers, set up waterproof bags for AC water cleaning, and wipe down appliances after service is completed.',
+      title: 'At-Home Service',
+      description: 'Request an AC or washing machine service visit for your home in the listed coverage areas.',
     },
     {
       icon: Sparkles,
-      title: 'Kerala Climate Optimization',
-      description: 'Coastal air and humidity create distinct corrosion and fungal challenges. We calibrate equipment to deliver maximum cooling efficiency while reducing electricity draw.',
+      title: 'AC & Washing Machine Options',
+      description: 'Explore AC cleaning, inspection, and maintenance or washing machine repair and descaling.',
     },
     {
       icon: UserCheck,
-      title: 'Customer-First Communication',
-      description: 'Clear explanations in straightforward language. We explain what caused the problem and give you maintenance advice to extend your appliance lifespan.',
+      title: 'Talk to the Team',
+      description: 'Call or start a WhatsApp enquiry to share your appliance, location, and preferred visit date.',
     },
   ];
 

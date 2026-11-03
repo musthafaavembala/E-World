@@ -29,7 +29,7 @@ export const LocationsSection: React.FC<LocationsSectionProps> = ({ onSelectLoca
               className="glass-panel rounded-2xl p-5 sm:p-7 flex flex-col justify-between glass-panel-hover"
             >
               <div>
-                <div className="flex items-start justify-between gap-2">
+                <div className="flex flex-col items-start justify-between gap-3 sm:flex-row sm:gap-2">
                   <div className="flex items-center gap-2.5 sm:gap-3">
                     <div className="p-2.5 sm:p-3 rounded-xl bg-brand-blue/20 text-brand-cyan border border-brand-cyan/20 shrink-0">
                       <MapPin className="w-5 h-5 sm:w-6 sm:h-6" />
@@ -41,8 +41,8 @@ export const LocationsSection: React.FC<LocationsSectionProps> = ({ onSelectLoca
                   </div>
 
                   <span className="inline-flex items-center gap-1.5 px-2.5 sm:px-3 py-1 rounded-full text-[10px] sm:text-[11px] font-semibold bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 shrink-0">
-                    <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-ping" />
-                    Active Area
+                    <span className="w-1.5 h-1.5 rounded-full bg-emerald-400" />
+                    Service Area
                   </span>
                 </div>
 

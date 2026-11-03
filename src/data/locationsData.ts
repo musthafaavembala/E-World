@@ -10,15 +10,15 @@ export const locationsData: LocationItem[] = [
   {
     name: 'Parappanangadi',
     district: 'Malappuram District, Kerala',
-    coverage: 'Complete residential & commercial doorstep service across Parappanangadi town, railway station area, beach road, and nearby residential neighbourhoods.',
-    response: 'Same-day & scheduled visits available',
+    coverage: 'Service requests are listed for Parappanangadi. Contact us to confirm coverage for your exact address.',
+    response: 'Contact us to confirm available visit times',
     popularServices: ['AC Water Service', 'Deep Cleaning', 'Washing Machine Repair'],
   },
   {
     name: 'Kondotty',
     district: 'Malappuram District, Kerala',
-    coverage: 'Prompt technician visits for homes, apartments, and offices throughout Kondotty, airport road, town centre, and adjacent residential belts.',
-    response: 'Same-day & scheduled visits available',
+    coverage: 'Service requests are listed for Kondotty. Contact us to confirm coverage for your exact address.',
+    response: 'Contact us to confirm available visit times',
     popularServices: ['AC Water Jet Cleaning', 'Front-Load Washer Service', 'Seasonal AC Tune-up'],
   },
 ];

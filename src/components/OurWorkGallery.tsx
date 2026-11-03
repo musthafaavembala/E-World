@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { Maximize2, X, ChevronLeft, ChevronRight } from 'lucide-react';
 
 interface GalleryItem {
@@ -10,6 +10,9 @@ interface GalleryItem {
 
 export const OurWorkGallery: React.FC = () => {
   const [selectedImageIndex, setSelectedImageIndex] = useState<number | null>(null);
+  const closeButtonRef = useRef<HTMLButtonElement>(null);
+  const dialogRef = useRef<HTMLDivElement>(null);
+  const previouslyFocusedElement = useRef<HTMLElement | null>(null);
 
   const galleryItems: GalleryItem[] = [
     {
@@ -21,7 +24,7 @@ export const OurWorkGallery: React.FC = () => {
     {
       id: 2,
       image: '/assets/images/ac-deep-cleaning.jpg',
-      title: 'Antimicrobial Coil Foam Sanitization',
+      title: 'AC Foam Coil Cleaning',
       category: 'Air Conditioning',
     },
     {
@@ -50,6 +53,52 @@ export const OurWorkGallery: React.FC = () => {
     },
   ];
 
+  const closeGallery = () => {
+    setSelectedImageIndex(null);
+    previouslyFocusedElement.current?.focus();
+  };
+
+  useEffect(() => {
+    if (selectedImageIndex === null) return;
+
+    const previousOverflow = document.body.style.overflow;
+    document.body.style.overflow = 'hidden';
+    closeButtonRef.current?.focus();
+
+    const handleKeyDown = (event: KeyboardEvent) => {
+      if (event.key === 'Escape') closeGallery();
+      if (event.key === 'ArrowLeft') {
+        setSelectedImageIndex((index) =>
+          index === null ? null : (index - 1 + galleryItems.length) % galleryItems.length
+        );
+      }
+      if (event.key === 'ArrowRight') {
+        setSelectedImageIndex((index) =>
+          index === null ? null : (index + 1) % galleryItems.length
+        );
+      }
+      if (event.key === 'Tab') {
+        const focusableElements = dialogRef.current?.querySelectorAll<HTMLButtonElement>('button');
+        if (!focusableElements?.length) return;
+        const firstElement = focusableElements[0];
+        const lastElement = focusableElements[focusableElements.length - 1];
+        if (event.shiftKey && document.activeElement === firstElement) {
+          event.preventDefault();
+          lastElement.focus();
+        } else if (!event.shiftKey && document.activeElement === lastElement) {
+          event.preventDefault();
+          firstElement.focus();
+        }
+      }
+    };
+
+    window.addEventListener('keydown', handleKeyDown);
+    return () => {
+      document.body.style.overflow = previousOverflow;
+      window.removeEventListener('keydown', handleKeyDown);
+    };
+  }, [selectedImageIndex]);
+
   const handlePrev = (e: React.MouseEvent) => {
     e.stopPropagation();
     if (selectedImageIndex !== null) {
@@ -71,23 +120,28 @@ export const OurWorkGallery: React.FC = () => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center max-w-3xl mx-auto">
           <span className="text-xs font-bold uppercase tracking-widest text-brand-cyan">
-            Visual Proof of Care
+            Service Gallery
           </span>
           <h2 className="mt-3 text-2xl sm:text-4xl lg:text-5xl font-extrabold text-white tracking-tight">
             Quality Work. <span className="gradient-text-cool">Professional Care.</span>
           </h2>
           <p className="mt-3 sm:mt-4 text-sm sm:text-base lg:text-lg text-brand-muted">
-            From high-pressure water jacket cleaning to delicate washing machine circuit repair, explore our standards of workmanship.
+            Browse AC cleaning, washing machine service, and diagnostic equipment images.
           </p>
         </div>
 
         {/* Gallery Grid */}
         <div className="mt-10 sm:mt-14 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 sm:gap-6">
           {galleryItems.map((item, index) => (
-            <div
+            <button
+              type="button"
               key={item.id}
-              onClick={() => setSelectedImageIndex(index)}
-              className="group relative rounded-2xl overflow-hidden glass-panel cursor-pointer aspect-[4/3] glass-panel-hover"
+              onClick={(event) => {
+                previouslyFocusedElement.current = event.currentTarget;
+                setSelectedImageIndex(index);
+              }}
+              aria-label={`View ${item.title} full size`}
+              className="group relative rounded-2xl overflow-hidden glass-panel cursor-pointer aspect-[4/3] glass-panel-hover p-0 text-left focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-cyan focus-visible:ring-offset-2 focus-visible:ring-offset-brand-midnight"
             >
               <img
                 src={item.image}
@@ -113,23 +167,29 @@ export const OurWorkGallery: React.FC = () => {
                   </h3>
                 </div>
               </div>
-            </div>
+            </button>
           ))}
         </div>
 
         <p className="mt-6 text-center text-xs text-brand-muted">
-          Click any photograph to view in full resolution.
+          Select any photograph to view it larger.
         </p>
       </div>
 
       {/* Lightbox Modal */}
       {selectedImageIndex !== null && (
         <div
-          onClick={() => setSelectedImageIndex(null)}
+          onClick={closeGallery}
+          ref={dialogRef}
+          role="dialog"
+          aria-modal="true"
+          aria-label="Work gallery image viewer"
           className="fixed inset-0 z-50 bg-black/90 backdrop-blur-xl flex items-center justify-center p-3 sm:p-8 animate-in fade-in"
         >
           <button
-            onClick={() => setSelectedImageIndex(null)}
+            onClick={closeGallery}
+            ref={closeButtonRef}
+            autoFocus
             className="absolute top-4 right-4 sm:top-6 sm:right-6 p-2 sm:p-3 rounded-full bg-white/10 hover:bg-white/20 text-white transition z-10"
             aria-label="Close lightbox"
           >

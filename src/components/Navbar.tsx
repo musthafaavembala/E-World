@@ -22,13 +22,19 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenBooking }) => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
+  useEffect(() => {
+    if (!mobileMenuOpen) return;
+    const handleKeyDown = (event: KeyboardEvent) => {
+      if (event.key === 'Escape') setMobileMenuOpen(false);
+    };
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, [mobileMenuOpen]);
+
   const navLinks = [
     { name: 'Home', href: '#home' },
     { name: 'Services', href: '#services' },
-    { name: 'Why Us', href: '#why-us' },
-    { name: 'Brands', href: '#brands' },
-    { name: 'Our Work', href: '#our-work' },
-    { name: 'Locations', href: '#locations' },
+    { name: 'Booking', href: '#book' },
     { name: 'Contact', href: '#contact' },
   ];
 
@@ -36,8 +42,8 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenBooking }) => {
     <header
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
         isScrolled
-          ? 'bg-brand-midnight/90 backdrop-blur-md border-b border-brand-border py-3 shadow-lg shadow-black/20'
-          : 'bg-transparent py-5'
+          ? 'bg-brand-midnight/95 backdrop-blur-md border-b border-brand-border py-2.5 shadow-lg shadow-black/20'
+          : 'bg-brand-midnight/80 backdrop-blur-sm py-3'
       }`}
     >
       <div className="max-w-7xl mx-auto px-3.5 sm:px-6 lg:px-8">
@@ -52,8 +58,8 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenBooking }) => {
           </a>
 
           {/* Desktop Navigation Links */}
-          <nav className="hidden lg:flex items-center gap-7">
-            {navLinks.map((link) => (
+          <nav className="hidden lg:flex items-center gap-6">
+            {navLinks.filter((link) => link.name !== 'Booking').map((link) => (
               <a
                 key={link.name}
                 href={link.href}
@@ -65,7 +71,7 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenBooking }) => {
           </nav>
 
           {/* Action CTAs */}
-          <div className="hidden sm:flex items-center gap-3 shrink-0">
+          <div className="hidden lg:flex items-center gap-3 shrink-0">
             <a
               href="https://wa.me/918157001618?text=Hello%20E%20WORLD%2C%20I%20would%20like%20to%20enquire%20about%20your%20services."
               target="_blank"
@@ -79,26 +85,30 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenBooking }) => {
 
             <button
               onClick={onOpenBooking}
-              className="inline-flex items-center gap-2 px-5 py-2 rounded-full text-xs font-bold uppercase tracking-wider text-white gradient-cool shadow-glow-blue hover:brightness-110 active:scale-95 transition-all duration-200"
+              className="inline-flex items-center gap-2 px-4 py-2 rounded-full text-xs font-bold uppercase tracking-wider text-white gradient-cool shadow-glow-blue hover:brightness-110 active:scale-95 transition-all duration-200"
             >
               <Calendar className="w-3.5 h-3.5" />
-              <span>Book a Service</span>
+              <span>Booking</span>
             </button>
           </div>
 
           {/* Mobile Menu Toggle Button */}
-          <div className="flex items-center gap-1.5 sm:gap-2 lg:hidden shrink-0">
+          <div className="flex items-center gap-2 lg:hidden shrink-0">
             <button
-              onClick={onOpenBooking}
-              className="sm:hidden px-2.5 py-1.5 rounded-full text-[10.5px] font-bold uppercase tracking-wider text-white gradient-cool shadow-glow-blue whitespace-nowrap"
+              onClick={() => {
+                setMobileMenuOpen(false);
+                onOpenBooking();
+              }}
+              className="px-3 py-2 rounded-full text-[11px] font-bold uppercase tracking-wider text-white gradient-cool shadow-glow-blue whitespace-nowrap"
             >
-              Book
+              Booking
             </button>
             <button
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
               className="p-1.5 sm:p-2 rounded-xl bg-white/5 border border-brand-border text-brand-muted hover:text-white transition"
               aria-label={mobileMenuOpen ? 'Close menu' : 'Open menu'}
               aria-expanded={mobileMenuOpen}
+              aria-controls="mobile-navigation"
             >
               {mobileMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
             </button>
@@ -107,54 +117,38 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenBooking }) => {
       </div>
 
       {/* Mobile Drawer */}
-      {mobileMenuOpen && (
-        <div className="lg:hidden fixed inset-x-0 top-full bg-brand-midnight/98 backdrop-blur-xl border-b border-brand-border shadow-2xl px-5 sm:px-6 py-6 transition-all animate-in slide-in-from-top-4 max-h-[calc(100vh-4.5rem)] overflow-y-auto">
-          <nav className="flex flex-col gap-4">
-            {navLinks.map((link) => (
+      <div id="mobile-navigation" hidden={!mobileMenuOpen} className="lg:hidden absolute inset-x-0 top-full bg-brand-midnight/98 backdrop-blur-xl border-b border-brand-border shadow-2xl px-5 sm:px-6 py-4 transition-all animate-in slide-in-from-top-4 max-h-[calc(100vh-4.5rem)] overflow-y-auto">
+          <nav className="flex flex-col gap-2">
+            {navLinks.filter((link) => link.name !== 'Booking').map((link) => (
               <a
                 key={link.name}
                 href={link.href}
                 onClick={() => setMobileMenuOpen(false)}
-                className="text-base font-medium text-brand-soft hover:text-brand-cyan transition py-1"
+                className="text-sm font-medium text-brand-soft hover:text-brand-cyan transition py-2"
               >
                 {link.name}
               </a>
             ))}
           </nav>
-
-          <div className="pt-6 mt-4 border-t border-brand-border flex flex-col gap-3">
-            <button
-              onClick={() => {
-                setMobileMenuOpen(false);
-                onOpenBooking();
-              }}
-              className="w-full flex items-center justify-center gap-2 py-3 rounded-xl text-sm font-bold text-white gradient-cool shadow-glow-blue"
+          <div className="mt-3 grid grid-cols-2 gap-2 border-t border-brand-border pt-3">
+            <a
+              href="tel:+918157001618"
+              className="flex items-center justify-center gap-2 rounded-lg border border-white/10 bg-white/5 py-2.5 text-xs font-semibold text-brand-soft"
             >
-              <Calendar className="w-4 h-4" />
-              <span>Book a Service</span>
-            </button>
-
-            <div className="grid grid-cols-2 gap-3 pt-1">
-              <a
-                href="tel:+918157001618"
-                className="flex items-center justify-center gap-2 py-2.5 rounded-xl text-xs font-semibold text-brand-soft bg-white/5 border border-brand-border"
-              >
-                <Phone className="w-3.5 h-3.5 text-brand-cyan" />
-                <span>Call Now</span>
-              </a>
-              <a
-                href="https://wa.me/918157001618?text=Hello%20E%20WORLD%2C%20I%20would%20like%20to%20book%20a%20service."
-                target="_blank"
-                rel="noopener noreferrer"
-                className="flex items-center justify-center gap-2 py-2.5 rounded-xl text-xs font-semibold text-brand-soft bg-emerald-500/10 border border-emerald-500/20 text-emerald-300"
-              >
-                <MessageCircle className="w-3.5 h-3.5" />
-                <span>WhatsApp</span>
-              </a>
-            </div>
+              <Phone className="h-4 w-4 text-brand-cyan" />
+              Call
+            </a>
+            <a
+              href="https://wa.me/918157001618?text=Hello%20E%20WORLD%2C%20I%20would%20like%20to%20enquire%20about%20your%20services."
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex items-center justify-center gap-2 rounded-lg border border-emerald-500/20 bg-emerald-500/10 py-2.5 text-xs font-semibold text-emerald-300"
+            >
+              <MessageCircle className="h-4 w-4" />
+              WhatsApp
+            </a>
           </div>
-        </div>
-      )}
+      </div>
     </header>
   );
 };

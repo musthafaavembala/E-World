@@ -1,32 +1,32 @@
 import React from 'react';
-import { Home, Award, Wrench, ShieldCheck, Zap, MessageSquare } from 'lucide-react';
+import { Home, Wind, Wrench, MapPin, Phone, MessageSquare } from 'lucide-react';
 
 export const WhyChooseSection: React.FC = () => {
   const highlights = [
     {
       icon: Home,
       title: 'Convenient Doorstep Visits',
-      description: 'We come directly to your home or office in Parappanangadi and Kondotty with complete equipment, saving you hassle.',
+      description: 'Request AC or washing machine service at your home in Parappanangadi or Kondotty.',
     },
     {
-      icon: Award,
-      title: 'Experienced Field Technicians',
-      description: 'Skilled technicians with in-depth practical knowledge across split air conditioning systems and all major washing machines.',
-    },
-    {
-      icon: ShieldCheck,
-      title: 'Quality Workmanship & Genuine Parts',
-      description: 'Every repair uses reliable, high-grade parts and correct manufacturer-compliant techniques for lasting performance.',
+      icon: Wind,
+      title: 'AC & Washing Machine Care',
+      description: 'Choose from the listed AC cleaning, inspection, and maintenance services or washing machine repairs.',
     },
     {
       icon: Wrench,
-      title: 'Mess-Free Cleaning Standards',
-      description: 'Using specialized waterproof service bags during AC water cleaning protects your interior walls, floor, and furniture completely.',
+      title: 'Service Options Explained',
+      description: 'Describe the issue and ask about diagnosis, repair options, and any parts needed before confirming service.',
     },
     {
-      icon: Zap,
-      title: 'Fast Response & Clear Pricing',
-      description: 'Honest upfront diagnostic communication with no hidden fees, plus prompt service scheduling when your cooling is down.',
+      icon: MapPin,
+      title: 'Local Service Areas',
+      description: 'Doorstep service is listed for Parappanangadi and Kondotty. Contact the team to check nearby areas.',
+    },
+    {
+      icon: Phone,
+      title: 'Call to Confirm Availability',
+      description: 'Speak with the team about visit timing and service costs for your appliance and location.',
     },
     {
       icon: MessageSquare,

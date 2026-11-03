@@ -13,13 +13,13 @@ export const BrandsSection: React.FC = () => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center max-w-3xl mx-auto">
           <span className="text-xs font-bold uppercase tracking-widest text-brand-cyan">
-            Universal Compatibility
+            Brand Support
           </span>
           <h2 className="mt-3 text-2xl sm:text-4xl lg:text-5xl font-extrabold text-white tracking-tight">
             Brands We Service
           </h2>
           <p className="mt-3 sm:mt-4 text-sm sm:text-base lg:text-lg text-brand-muted">
-            Expert diagnostic and service capabilities for all major air conditioner and washing machine brands in Kerala.
+            These are the brands listed for AC and washing machine service. Contact us to confirm support for your make and model.
           </p>
         </div>
 
