@@ -34,12 +34,18 @@ export const Footer: React.FC = () => (
             <Phone className="h-4 w-4 text-brand-cyan" aria-hidden="true" />
             Contact
           </h2>
-          <div className="flex flex-wrap items-center gap-x-4 gap-y-2">
+          <div className="flex flex-col items-start gap-2">
             <a
               href="tel:+918157001618"
               className="font-medium text-brand-soft transition-colors hover:text-brand-cyan focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-cyan rounded"
             >
               +91 8157001618
+            </a>
+            <a
+              href="tel:+918157001108"
+              className="font-medium text-brand-soft transition-colors hover:text-brand-cyan focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-cyan rounded"
+            >
+              +91 8157001108
             </a>
             <a
               href="https://www.instagram.com/e_world_cooling__ac_service?vrfl=MW80MWZvZXVkc3VhdA=="
