@@ -117,32 +117,32 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenBooking }) => {
       </div>
 
       {/* Mobile Drawer */}
-      <div id="mobile-navigation" hidden={!mobileMenuOpen} className="lg:hidden absolute inset-x-0 top-full bg-brand-midnight/98 backdrop-blur-xl border-b border-brand-border shadow-2xl px-5 sm:px-6 py-4 transition-all animate-in slide-in-from-top-4 max-h-[calc(100vh-4.5rem)] overflow-y-auto">
+      <div id="mobile-navigation" hidden={!mobileMenuOpen} className="lg:hidden absolute inset-x-0 top-full bg-sky-200/98 backdrop-blur-xl border-b border-sky-300 shadow-2xl px-5 sm:px-6 py-4 transition-all animate-in slide-in-from-top-4 max-h-[calc(100vh-4.5rem)] overflow-y-auto">
           <nav className="flex flex-col gap-2">
             {navLinks.filter((link) => link.name !== 'Booking').map((link) => (
               <a
                 key={link.name}
                 href={link.href}
                 onClick={() => setMobileMenuOpen(false)}
-                className="text-sm font-medium text-brand-soft hover:text-brand-cyan transition py-2"
+                className="text-sm font-medium text-slate-900 hover:text-blue-700 transition py-2"
               >
                 {link.name}
               </a>
             ))}
           </nav>
-          <div className="mt-3 grid grid-cols-2 gap-2 border-t border-brand-border pt-3">
+          <div className="mt-3 grid grid-cols-2 gap-2 border-t border-sky-300 pt-3">
             <a
               href="tel:+918157001618"
-              className="flex items-center justify-center gap-2 rounded-lg border border-white/10 bg-white/5 py-2.5 text-xs font-semibold text-brand-soft"
+              className="flex items-center justify-center gap-2 rounded-lg border border-sky-300 bg-white/70 py-2.5 text-xs font-semibold text-slate-900"
             >
-              <Phone className="h-4 w-4 text-brand-cyan" />
+              <Phone className="h-4 w-4 text-blue-700" />
               Call
             </a>
             <a
               href="https://wa.me/918157001618?text=Hello%20E%20WORLD%2C%20I%20would%20like%20to%20enquire%20about%20your%20services."
               target="_blank"
               rel="noopener noreferrer"
-              className="flex items-center justify-center gap-2 rounded-lg border border-emerald-500/20 bg-emerald-500/10 py-2.5 text-xs font-semibold text-emerald-300"
+              className="flex items-center justify-center gap-2 rounded-lg border border-emerald-700/20 bg-white/70 py-2.5 text-xs font-semibold text-emerald-800"
             >
               <MessageCircle className="h-4 w-4" />
               WhatsApp
