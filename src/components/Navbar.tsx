@@ -99,7 +99,6 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenBooking }) => {
     { name: 'Services', href: '#services', section: 'services', Icon: Wind },
     { name: 'Why Us', href: '#why-us', section: 'why-us', Icon: BadgeCheck },
     { name: 'Booking', href: '#book', section: 'book', Icon: Calendar },
-    { name: 'Contact', href: '#contact', section: 'contact', Icon: MapPin },
   ];
 
   return (
